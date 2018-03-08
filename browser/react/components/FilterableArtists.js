@@ -9,7 +9,7 @@ export default class FilterableArtists extends React.Component{
     super(props);
     this.state = {
       formInput: '',
-      artists: []
+      artists: this.props.artists
     }
     this.onChange = this.onChange.bind(this)
   }
@@ -18,13 +18,7 @@ export default class FilterableArtists extends React.Component{
       formInput: event.target.value
     })
   }
-  componentDidMount(){
-    axios.get('/api/artists')
-      .then(res => res.data)
-      .then(artists => this.setState({
-        artists
-      }))
-  }
+  
   render(){
     const input = this.state.formInput;
     const filteredArtist = this.state.artists.filter(artist => 

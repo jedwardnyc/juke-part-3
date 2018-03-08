@@ -1,11 +1,13 @@
 import React from 'react';
 import NewPlaylist from './NewPlaylist';
+import axios from 'axios';
 
 export default class PlaylistContainer extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       playlistInput: '',
+      playlists: this.props.playlists
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -17,15 +19,14 @@ export default class PlaylistContainer extends React.Component{
   }
   onSubmit(event){
     event.preventDefault()
-    this.setState({
-      playlistInput: ''
-    })
-    console.log(this.state.playlistInput)
+    this.props.addPlaylist(this.state.playlistInput)
+    this.setState({playlistInput: ''})
   }
+ 
   render(){
     return(
       <div>
-        <NewPlaylist onChange={this.onChange} onSubmit={this.onSubmit} value={this.state.playlistInput} />
+        <NewPlaylist onChange={this.onChange} onSubmit={this.onSubmit} value={this.state.playlistInput}/>
       </div>
     )
   }
